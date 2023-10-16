@@ -8,3 +8,46 @@ textarea:focus,
 button:focus {
   outline: none;
 }
+
+.confirmation-message {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #4caf50; /* Cambia el color de fondo según tus preferencias */
+  margin-top: 20px;
+  color: white;
+  font-size: 24px; /* Tamaño de fuente grande */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.confirmation-message p {
+  margin: 0;
+  padding-left: 20px; /* Espacio a la izquierda del texto */
+}
+
+.confirmation-message .confirmation-icon {
+  font-size: 48px; /* Tamaño del icono grande */
+  margin-right: 10px; /* Espacio a la derecha del icono */
+}
+
+.volver-button {
+  background-color: #3960e7;
+  color: white;
+  font-size: 24px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none; /* Elimina el subrayado */
+  display: block;
+  text-align: center;
+  margin-top: 32px;
+  width: 130px;
+}
+
+.button-div {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+}
