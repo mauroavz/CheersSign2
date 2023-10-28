@@ -1,9 +1,10 @@
 import React from "react";
-import { primary45 } from "../utils/colors";
+import { blackIcon, hoveredBlue, primary45 } from "../utils/colors";
 import useHover from "../hooks/useHover";
 
 export function BigButton({
   title,
+  icon,
   onClick,
   inverted,
   fullWidth,
@@ -19,12 +20,12 @@ export function BigButton({
   const [hoverRef, isHovered] = useHover();
 
   let fillColor = customFillColor || primary45;
-  const whiteColor = customWhiteColor || "#FFF";
+  const whiteColor = customWhiteColor || blackIcon;
 
   let initialBg = null;
-  let hoverBg = fillColor;
+  let hoverBg = hoveredBlue;
 
-  let initialColor = fillColor;
+  let initialColor = blackIcon;
   let hoverColor = whiteColor;
 
   if (inverted) {
@@ -43,6 +44,7 @@ export function BigButton({
   const styles = {
     container: {
       display: "inline-flex",
+      gap: 4,
       alignItems: "center",
       justifyContent: "center",
       width: fullWidth ? "100%" : null,
@@ -75,6 +77,7 @@ export function BigButton({
         }
       }}
     >
+      {icon && <img src={icon} alt="icon" />}
       {title}
     </div>
   );

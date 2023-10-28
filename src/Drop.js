@@ -1,15 +1,16 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { cleanBorder, primary45 } from "./utils/colors";
+import { blueCheers, cleanBorder } from "./utils/colors";
 
 export default function Drop({ onLoaded }) {
   const styles = {
     container: {
       textAlign: "center",
       border: cleanBorder,
+      borderColor: blueCheers,
       padding: 20,
-      marginTop: 12,
-      color: primary45,
+      marginTop: 44,
+      color: blueCheers,
       fontSize: 18,
       fontWeight: 600,
       borderRadius: 4,

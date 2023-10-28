@@ -228,69 +228,70 @@ function Signclient() {
                   ) : null}
                   {signatureURL ? (
                     <DraggableSignature
-                      url={signatureURL}
-                      onCancel={() => {
-                        setSignatureURL(null);
-                      }}
-                      onSet={async () => {
-                        const { originalHeight, originalWidth } = pageDetails;
-                        const scale =
-                          originalWidth / documentRef.current.clientWidth;
+                    url={signatureURL}
+                    onCancel={() => {
+                      setSignatureURL(null);
+                    }}
+                    onSet={async () => {
+                      const { originalHeight, originalWidth } = pageDetails;
+                      const scale =
+                        originalWidth / documentRef.current.clientWidth;
 
-                        const y =
-                          documentRef.current.clientHeight -
-                          (position.y -
-                            position.offsetY +
-                            documentRef.current.offsetTop);
-                        const x =
-                          position.x -
-                          160 -
-                          position.offsetX -
-                          documentRef.current.offsetLeft;
+                      const y =
+                        documentRef.current.clientHeight -
+                        (position.y -
+                          position.offsetY +
+                          64 -
+                          documentRef.current.offsetTop);
+                      const x =
+                        position.x -
+                        160 -
+                        position.offsetX -
+                        documentRef.current.offsetLeft;
 
-                        // new XY in relation to actual document size
-                        const newY =
-                          (y * originalHeight) /
-                          documentRef.current.clientHeight;
-                        const newX =
-                          (x * originalWidth) / documentRef.current.clientWidth;
+                      // new XY in relation to actual document size
+                      const newY =
+                        (y * originalHeight) /
+                        documentRef.current.clientHeight;
+                      const newX =
+                        (x * originalWidth) / documentRef.current.clientWidth;
 
-                        const pdfDoc = await PDFDocument.load(pdf);
+                      const pdfDoc = await PDFDocument.load(pdf);
 
-                        const pages = pdfDoc.getPages();
-                        const firstPage = pages[pageNum];
+                      const pages = pdfDoc.getPages();
+                      const firstPage = pages[pageNum];
 
-                        const pngImage = await pdfDoc.embedPng(signatureURL);
-                        const pngDims = pngImage.scale(scale * 0.3);
+                      const pngImage = await pdfDoc.embedPng(signatureURL);
+                      const pngDims = pngImage.scale(scale * 0.3);
 
-                        firstPage.drawImage(pngImage, {
-                          x: newX,
-                          y: newY,
-                          width: pngDims.width,
-                          height: pngDims.height,
-                        });
+                      firstPage.drawImage(pngImage, {
+                        x: newX,
+                        y: newY,
+                        width: pngDims.width,
+                        height: pngDims.height,
+                      });
 
-                        if (autoDate) {
-                          firstPage.drawText(
-                            `Signed ${dayjs().format("M/d/YYYY HH:mm:ss ZZ")}`,
-                            {
-                              x: newX,
-                              y: newY - 10,
-                              size: 14 * scale,
-                              color: rgb(0.074, 0.545, 0.262),
-                            },
-                          );
-                        }
+                      if (autoDate) {
+                        firstPage.drawText(
+                          `Signed ${dayjs().format("M/d/YYYY HH:mm:ss ZZ")}`,
+                          {
+                            x: newX,
+                            y: newY - 10,
+                            size: 14 * scale,
+                            color: rgb(0.074, 0.545, 0.262),
+                          },
+                        );
+                      }
 
-                        const pdfBytes = await pdfDoc.save();
-                        const blob = new Blob([new Uint8Array(pdfBytes)]);
+                      const pdfBytes = await pdfDoc.save();
+                      const blob = new Blob([new Uint8Array(pdfBytes)]);
 
-                        const URL = await blobToURL(blob);
-                        setPdf(URL);
-                        setPosition(null);
-                        setSignatureURL(null);
-                      }}
-                      onEnd={setPosition}
+                      const URL = await blobToURL(blob);
+                      setPdf(URL);
+                      setPosition(null);
+                      setSignatureURL(null);
+                    }}
+                    onEnd={setPosition}
                     />
                   ) : null}
                   <Document

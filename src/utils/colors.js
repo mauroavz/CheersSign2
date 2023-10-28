@@ -5,6 +5,12 @@ export const primary35 = '#97bace';
 export const primary4 = 'hsl(204,38%,55%)';
 export const primary45 = 'hsl(218,49%,66%)';
 export const primary46 = '#6778cb';
+export const blueCheers = '#3960e7';
+export const hoveredBlue = '#b5d6ff';
+export const white = '#fcfdff';
+export const black = '#000';
+export const blackIcon = '#5c5c5c';
+export const grey = '#dae5f4';
 
 export const primary15 = 'rgb(241 249 255)';
 
